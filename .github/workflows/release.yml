@@ -1,0 +1,37 @@
+name: Release Build
+
+on:
+    release:
+        types: [published]
+
+permissions:
+    contents: write
+
+jobs:
+    build-and-upload:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v6
+
+            - name: Set up Java
+              uses: actions/setup-java@v5
+              with:
+                distribution: temurin
+                java-version: "22"
+
+            - name: Setup Gradle
+              uses: gradle/actions/setup-gradle@v6
+
+            - name: Grant execute permission for gradlew
+              run: chmod +x gradlew
+
+            - name: Build
+              run: ./gradlew build
+
+            - name: Upload release assets
+              uses: softprops/action-gh-release@v3
+              with:
+                files: |
+                    build/libs/authlib-patcher.jar
+                    build/libs/server-patcher.jar
