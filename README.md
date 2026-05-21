@@ -75,3 +75,20 @@ Example:
   }
 ]
 ```
+
+## Example patch.ps1
+
+The [`example/patch.ps1`](example/patch.ps1) script automates the full flow for patching a server jar with a patched authlib:
+
+- Extracts the authlib entry and its library id from `server.jar` into temporary `out/` directory
+- Patches the extracted authlib jar with `profiles.json`
+- Embeds the patched authlib back into `server.jar`
+- Cleans up the temporary `out/` directory
+
+Usage: place your `server.jar` and `profiles.json` next to the script (or edit the top of the script), then run it from the `example/` folder:
+
+```powershell
+. .\patch.ps1
+```
+
+Outputs the patched server jar next to the original server jar (named `<server>_patched.jar`).

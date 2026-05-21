@@ -35,3 +35,4 @@ jobs:
                 files: |
                     build/libs/authlib-patcher.jar
                     build/libs/server-patcher.jar
+                    build/libs/server-extractor.jar

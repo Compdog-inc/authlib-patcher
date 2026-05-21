@@ -8,6 +8,7 @@ import java.security.MessageDigest
 import java.util.jar.JarEntry
 import java.util.jar.JarFile
 import java.util.jar.JarOutputStream
+import kotlin.system.exitProcess
 
 object ServerPatcher {
 
@@ -16,7 +17,7 @@ object ServerPatcher {
 
         if (args.size < 3) {
             println("Usage: <server.jar> <group:artifact:version> <artifact.jar>")
-            return
+            exitProcess(1)
         }
 
         val serverJar = File(args[0])
@@ -24,8 +25,8 @@ object ServerPatcher {
         val artifactJar = File(args[2])
 
         if (!serverJar.exists() || !artifactJar.exists()) {
-            println("Input file missing")
-            return
+            System.err.println("Input file missing")
+            exitProcess(2)
         }
 
         val outputJar = File(

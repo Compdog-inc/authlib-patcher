@@ -13,6 +13,7 @@ import java.net.URLClassLoader
 import java.util.jar.JarEntry
 import java.util.jar.JarFile
 import java.util.jar.JarOutputStream
+import kotlin.system.exitProcess
 
 data class SpecialProfile(
     val username: String,
@@ -28,21 +29,21 @@ object AuthlibPatcher {
     fun main(args: Array<String>) {
 
         if (args.size < 2) {
-            println("Usage: java -jar patcher.jar <input.jar> <profiles.json>")
-            return
+            println("Usage: <input.jar> <profiles.json>")
+            exitProcess(1)
         }
 
         val inputJar = File(args[0])
         val jsonFile = File(args[1])
 
         if (!inputJar.exists()) {
-            println("Input jar does not exist: ${inputJar.absolutePath}")
-            return
+            System.err.println("Input jar does not exist: ${inputJar.absolutePath}")
+            exitProcess(2)
         }
 
         if (!jsonFile.exists()) {
-            println("JSON file does not exist: ${jsonFile.absolutePath}")
-            return
+            System.err.println("JSON file does not exist: ${jsonFile.absolutePath}")
+            exitProcess(3)
         }
 
         profiles = loadProfiles(jsonFile)

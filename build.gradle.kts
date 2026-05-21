@@ -26,7 +26,8 @@ tasks.test {
 
 val mainClasses = mapOf(
     "authlib-patcher" to "com.compdog.authlibpatcher.AuthlibPatcher",
-    "server-patcher" to "com.compdog.authlibpatcher.ServerPatcher"
+    "server-patcher" to "com.compdog.authlibpatcher.ServerPatcher",
+    "server-extractor" to "com.compdog.authlibpatcher.ServerExtractor"
 )
 
 val fatJars = mainClasses.map  { (jarName, mainClass) ->
