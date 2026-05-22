@@ -51,7 +51,9 @@ If the authlib JAR is already patched, `patch.sh` exits without changing it.
 docker compose up -d
 ```
 
+<!-- markdownlint-disable MD029 -->
 3. Watch logs:
+<!-- markdownlint-enable MD029 -->
 
 ```bash
 docker compose logs -f
@@ -68,7 +70,9 @@ fresh:
 
 1. Stop the container: `docker compose down`
 2. Delete the server JAR from the data volume.
-  - By default it is in the `./data/.fabric/server/` directory on fabric
+
+    - By default it is in the `./data/.fabric/server/` directory on fabric
+
 3. Start again: `docker compose up -d`
 
 ## Customize for your own server
