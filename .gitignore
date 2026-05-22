@@ -1,7 +1,6 @@
 .gradle
 build/
-example/*
-!example/*.ps1
+example/**/profiles.json
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/

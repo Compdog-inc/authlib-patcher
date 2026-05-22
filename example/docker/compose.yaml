@@ -1,0 +1,32 @@
+services:
+  mc:
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM itzg/minecraft-server:latest
+
+        COPY ./patch/entrypoint-wrapper.sh /entrypoint-wrapper.sh
+        RUN chmod +x /entrypoint-wrapper.sh
+        ENTRYPOINT ["/entrypoint-wrapper.sh"]
+      pull: true # Always pull new base image
+    tty: true
+    stdin_open: true
+    pull_policy: build
+    restart: unless-stopped
+    ports:
+      - "25565:25565"
+    environment:
+      EULA: "TRUE"
+      TYPE: "FABRIC"
+      VERSION: "26.1.2"
+      MEMORY: "10240M"
+      MAX_PLAYERS: "30"
+      MOTD: "authlib-patcher example server"
+      USE_MEOWICE_FLAGS: "true"
+      DIFFICULTY: "3"
+      VIEW_DISTANCE: "18"
+      SPAWN_PROTECTION: "0"
+      LOG_TIMESTAMP: "true"
+    volumes:
+      - "./data:/data"
+      - "./patch:/patch"
